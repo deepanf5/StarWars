@@ -1,1 +1,13 @@
-/* You can add global styles to this file, and also import other style files */
+@import "primeicons/primeicons.css";
+@import 'primeflex/primeflex';
+
+
+@font-face {
+    font-family: "inter";
+    src: url(../public/assets/fonts/Inter-VariableFont_opsz\,wght.ttf) format('truetype');
+}
+
+
+body  {
+    font-family:"inter";
+}
