@@ -2,6 +2,20 @@
 @import 'primeflex/primeflex';
 
 
+*,
+*::after,
+*::before {
+
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+
+}
+
+
+
 @font-face {
     font-family: "inter";
     src: url(../public/assets/fonts/Inter-VariableFont_opsz\,wght.ttf) format('truetype');
@@ -10,4 +24,5 @@
 
 body  {
     font-family:"inter";
+    background-color:#e8e8e8;
 }
