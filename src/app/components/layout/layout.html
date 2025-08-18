@@ -24,10 +24,32 @@
         </div>
         </div>
     </div>
-    <div class="col h-10rem">
+    <div class="col">
         <div class="p-3 border-round-sm shadow-1 bg-white">
             <h2 class="uppercase text-primary text-sm">Search results</h2>
         </div>
+        <p-table [value]="starWarsDetails" 
+         [rows]="5"
+        [tableStyle]="{ 'min-width': '50rem' }"
+        [paginator]="true"
+        >
+    <ng-template #header>
+        <tr>
+            <th>Sl No</th>
+            <th>Character Name</th>
+            <th>Species</th>
+            <th>Birth Year</th>
+        </tr>
+    </ng-template>
+    <ng-template #body let-product let-rowIndex="rowIndex">
+        <tr>
+            <td>{{ rowIndex + 1 }}</td>
+            <td>{{ product.name }}</td>
+            <td>{{extractResourceAndId(product.species[0])}}</td>
+            <td>{{ product.birth_year }}</td>
+        </tr>
+    </ng-template>
+</p-table>
     </div>
 </div>
 
