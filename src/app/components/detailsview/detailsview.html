@@ -1,1 +1,51 @@
-<p>detailsview works!</p>
+<div class="grid">
+    <div class="col-12 md:col-6 lg:col-3 bg">
+
+        <div class="border-round-sm m-0 p-0  h-30rem shadow-1 bg-white">
+            <ul class="list-none pl-6 pt-7">
+        <li class="p-1 pt-2"><span class="font-bold">Name :</span> {{details?.name}}</li>
+        <li class="p-1 pt-2"><span class="font-bold">Birth Year : </span> {{details?.birth_year}}</li>
+        <li class="p-1 pt-2"><span class="font-bold">Gender :</span> {{details?.gender}}</li>
+        <li class="p-1 pt-2"><span class="font-bold">Height :</span> {{details?.height}}</li>
+        <li class="p-1 pt-2"><span class="font-bold">weight :</span> {{details?.mass}}</li>
+        <li class="p-1 pt-2"><span class="font-bold">created at : </span>: {{details?.created | date:'shortDate'}} </li>
+        <li class="p-1 pt-2"><span class="font-bold">edited at :</span> {{details?.edited | date:'shortDate'}}</li>
+        <li class="p-1 pt-2"><span class="font-bold">hair color : </span>{{details?.hair_color}} </li>
+        <li class="p-1 pt-2"><span class="font-bold">eye color :</span> {{details?.eye_color}}</li>
+        <li class="p-1 pt-2"><span class="font-bold">skin color : </span>{{details?.skin_color}} </li>
+        <li class="p-1 pt-5"><span class="font-bold">Planet Name : </span>{{planetDetails?.name}}</li>
+        @if(speciesDetails?.name) {
+            <li class="p-1 pt-2"><span class="font-bold">Species Name : </span>{{speciesDetails?.name}}</li>
+        }
+    </ul>
+        </div>
+    </div>
+    <div class="col-12 md:col-6 lg:col-9 bg">
+        <div class="p-3 border-round-sm font-bold h-screen shadow-1 bg-white mt-3">
+            <h2 class="text-primary">Films</h2>
+            <div class="grid">
+                @for (flims of filmDetails; track $index) {
+                    <div class="col-12 md:col-6 lg:col-3">
+                        <div class="p-3 border-round-sm  bg-white shadow-1 w-15rem">
+                            <p class="text-sm">Title :{{flims.title}}</p>
+                            <p class="text-sm">director : {{flims.director}}</p>
+                        </div>
+                    </div>
+
+                }
+            </div>
+            <h2 class="text-primary">Vechiles</h2>
+            <div class="grid">
+                  @for (vechile of vechileDetails; track $index) {
+                     <div class="col-12 md:col-6 lg:col-3">
+                        <div class="p-3 border-round-sm  bg-white shadow-1 w-15rem">
+                            <p class="text-sm">Name :{{vechile.name}}</p>
+                            <p class="text-sm">manufacturer : {{vechile.manufacturer}}</p>
+                            <p class="text-sm">model : {{vechile.model}}</p>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

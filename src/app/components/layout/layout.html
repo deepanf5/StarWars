@@ -1,5 +1,5 @@
 <section>
-    <app-header></app-header>
+
 
     <div class="grid mt-5">
     <div class="col-fixed" style="width:300px">
@@ -42,10 +42,10 @@
         </tr>
     </ng-template>
     <ng-template #body let-product let-rowIndex="rowIndex">
-        <tr>
+        <tr class="cursor-pointer"  (click)="getdetails(rowIndex + 1)">
             <td>{{ rowIndex + 1 }}</td>
             <td>{{ product.name }}</td>
-            <td>{{extractResourceAndId(product.species[0])}}</td>
+            <td>{{product.species.length}}</td>
             <td>{{ product.birth_year }}</td>
         </tr>
     </ng-template>
