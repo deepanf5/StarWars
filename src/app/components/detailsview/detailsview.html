@@ -36,15 +36,20 @@
             </div>
             <h2 class="text-primary">Vechiles</h2>
             <div class="grid">
-                  @for (vechile of vechileDetails; track $index) {
-                     <div class="col-12 md:col-6 lg:col-3">
-                        <div class="p-3 border-round-sm  bg-white shadow-1 w-15rem">
-                            <p class="text-sm">Name :{{vechile.name}}</p>
-                            <p class="text-sm">manufacturer : {{vechile.manufacturer}}</p>
-                            <p class="text-sm">model : {{vechile.model}}</p>
-                        </div>
-                    </div>
-                }
+                @if (vechileDetails.length > 0) {
+                    @for (vechile of vechileDetails; track $index) {
+                        <div class="col-12 md:col-6 lg:col-3">
+                           <div class="p-3 border-round-sm  bg-white shadow-1 w-15rem">
+                               <p class="text-sm">Name :{{vechile.name}}</p>
+                               <p class="text-sm">manufacturer : {{vechile.manufacturer}}</p>
+                               <p class="text-sm">model : {{vechile.model}}</p>
+                           </div>
+                       </div>
+                   }
+                  } @else {
+                        <p>No Vechiles are available</p>
+                  }
+                 
             </div>
         </div>
     </div>
