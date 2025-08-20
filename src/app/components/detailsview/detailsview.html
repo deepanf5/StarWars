@@ -27,8 +27,8 @@
                 @for (flims of filmDetails; track $index) {
                     <div class="col-12 md:col-6 lg:col-3">
                         <div class="p-3 border-round-sm  bg-white shadow-1 w-15rem">
-                            <p class="text-sm">Title :{{flims.title}}</p>
-                            <p class="text-sm">director : {{flims.director}}</p>
+                            <p class="text-sm"><span class="text-primary">Title :</span>{{flims.title}}</p>
+                            <p class="text-sm"><span class="text-primary">director :</span>  {{flims.director}}</p>
                         </div>
                     </div>
 
@@ -38,12 +38,12 @@
             <div class="grid">
                 @if (vechileDetails.length > 0) {
                     @for (vechile of vechileDetails; track $index) {
-                        <div class="col-12 md:col-6 lg:col-3">
-                           <div class="p-3 border-round-sm  bg-white shadow-1 w-15rem">
-                               <p class="text-sm">Name :{{vechile.name}}</p>
-                               <p class="text-sm">manufacturer : {{vechile.manufacturer}}</p>
-                               <p class="text-sm">model : {{vechile.model}}</p>
-                           </div>
+                        <div class="col-12 md:col-6 lg:col-5">
+                            <div class="p-3 border-round-sm  bg-white shadow-1 w-25rem">
+                                <p class="text-sm"><span class="text-primary">Name :</span>{{vechile.name}}</p>
+                                <p class="text-sm"><span class="text-primary">manufacturer :</span>{{vechile.manufacturer}}</p>
+                                <p class="text-sm"><span class="text-primary">Model :</span> {{vechile.model}}</p>
+                            </div>
                        </div>
                    }
                   } @else {
