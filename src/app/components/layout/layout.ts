@@ -19,6 +19,7 @@ export class Layout implements OnInit {
 
   selectedMovie: any
   starWarsDetails: any;
+  ogDetails:any;
   movies!: any;
   species!: any;
   starship!:any;
@@ -49,8 +50,8 @@ export class Layout implements OnInit {
 
   this.birthYear =
   [
-    { name: 'birth 1', },
-    { name: 'birth 2', },]
+    { name: 'All', },
+    { name: '19BBY', },]
 // this.selectedBithYear = [this.birthYear[0]]
   }
 
@@ -59,7 +60,8 @@ export class Layout implements OnInit {
     this.swapi.getSwapi().subscribe(
       {
         next: (res) => {
-          this.starWarsDetails = res
+          this.starWarsDetails = res;
+          this.ogDetails = this.starWarsDetails
         },
         error: (err) => console.log(err)
       }
@@ -89,9 +91,22 @@ export class Layout implements OnInit {
     // console.log(this.selectedCity.name[0]?.name);
     // console.log(this.selectedStarship.name[0]?.name);
     // console.log(this.selectedMovie.name[0]?.name)
-    // console.log(this.selectedBithYear.name[0]?.name)
+    console.log(this.selectedBithYear[0])
+    console.log(this.selectedBithYear[1])
 
-    console.log(this.starWarsDetails)
+    console.log('og',this.ogDetails)
+    console.log('both',this.selectedBithYear)
+    if(this.selectedBithYear[0]?.name !== 'All') {
+      this.starWarsDetails =  this.starWarsDetails.filter((details:any) => details.birth_year === this.selectedBithYear[0]?.name)
+    }
+    if(this.selectedBithYear[1]?.name === 'All' && this.selectedBithYear[0]?.name === '19BBY') {
+      console.log('works')
+      this.starWarsDetails = []
+      this.starWarsDetails =  this.ogDetails
+    }
+    if(this.selectedBithYear[1]?.name !== 'All' && this.selectedBithYear[0]?.name !== '19BBY') {
+      this.starWarsDetails =  this.ogDetails 
+    }
   }
 
 }
