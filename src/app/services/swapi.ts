@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, signal } from '@angular/core';
+import { People } from '../components/models/people';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,7 @@ export class Swapi {
 
 
   getSwapi() {
-    return this.http.get(this.APIUrl)
+    return this.http.get<People[]>(this.APIUrl)
   }
 
   getId(id:number) {
@@ -32,6 +33,7 @@ export class Swapi {
     return this.http.get(url)
   }
 
+ 
 
  
 
