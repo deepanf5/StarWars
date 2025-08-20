@@ -3,11 +3,12 @@ import { Swapi } from '../../services/swapi';
 import { DatePipe } from '@angular/common';
 import { forkJoin, of, switchMap } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { AvatarModule } from 'primeng/avatar';
 
 
 @Component({
   selector: 'app-detailsview',
-  imports: [DatePipe],
+  imports: [DatePipe,AvatarModule],
   templateUrl: './detailsview.html',
   styleUrl: './detailsview.scss'
 })

@@ -8,19 +8,27 @@
           <div class="text-center p-2 border-round-sm uppercase font-bold text-primary">Filters</div>
         </div>
         <div class="col-12">
-          <div class="text-center mr-4 ml-4 border-round-sm bg p-3 text-primary capitalize">Movie</div>
+          <div class="text-center mr-4 ml-4 border-round-sm bg p-3 text-primary capitalize">
+            <p-multiselect [showToggleAll]="false" [options]="movies"  [filter]="false" [(ngModel)]="selectedMovie" optionLabel="name" placeholder="Movie" [maxSelectedLabels]="3" class="w-full md:w-80" />
+          </div>
         </div>
         <div class="col-12">
-          <div class="text-center mr-4 ml-4 border-round-sm bg p-3 text-primary capitalize">Species</div>
+          <div class="text-center mr-4 ml-4 border-round-sm bg p-3 text-primary capitalize">
+            <p-multiselect [showToggleAll]="false" [options]="species"  [filter]="false" [(ngModel)]="selectedSepecies" optionLabel="name" placeholder="Species" [maxSelectedLabels]="3" class="w-full md:w-80" />
+          </div>
         </div>
         <div class="col-12">
-          <div class="text-center mr-4 ml-4 border-round-sm bg p-3 text-primary capitalize">Star Ships</div>
+          <div class="text-center mr-4 ml-4 border-round-sm bg p-3 text-primary capitalize">
+            <p-multiselect [showToggleAll]="false" [options]="starship"  [filter]="false" [(ngModel)]="selectedStarship" optionLabel="name" placeholder="StarShip" [maxSelectedLabels]="3" class="w-full md:w-80" />
+          </div>
         </div>
         <div class="col-12">
-          <div class="text-center mr-4 ml-4 border-round-sm bg p-3 text-primary capitalize">Birth Year</div>
+          <div class="text-center mr-4 ml-4 border-round-sm bg p-3 text-primary capitalize">
+            <p-multiselect [showToggleAll]="false" [options]="birthYear"  [filter]="false" [(ngModel)]="selectedBithYear" optionLabel="name" placeholder="Birth Year" [maxSelectedLabels]="3" class="w-full md:w-80" />
+          </div>
         </div>
         <div class="col-12">
-          <div class="text-center mr-4 ml-4 border-round-sm  p-1 border-solid border-primary-500 capitalize">search</div>
+          <div class="text-center mr-4 ml-4 border-round-sm  p-1 border-solid border-primary-500 capitalize cursor-pointer" (click)="filterby()">search</div>
         </div>
         </div>
     </div>
@@ -30,7 +38,7 @@
         </div>
         <p-table [value]="starWarsDetails" 
          [rows]="5"
-        [tableStyle]="{ 'min-width': '50rem' }"
+        [tableStyle]="{ 'min-width': '50rem', 'height':'18rem' }"
         [paginator]="true"
         >
     <ng-template #header>

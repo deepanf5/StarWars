@@ -6,59 +6,92 @@ import { TableModule } from 'primeng/table';
 import { ListboxModule } from 'primeng/listbox';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { MultiSelectModule } from 'primeng/multiselect';
 
 @Component({
   selector: 'app-layout',
-  imports: [TableModule,ListboxModule,FormsModule],
+  imports: [TableModule, ListboxModule, FormsModule, MultiSelectModule],
   templateUrl: './layout.html',
   styleUrl: './layout.scss'
 })
 export class Layout implements OnInit {
 
 
+  selectedMovie: any
+  starWarsDetails: any;
+  movies!: any;
+  species!: any;
+  starship!:any;
+  birthYear!:any
+  selectedCity: any;
+  selectedSepecies:any
+  selectedStarship:any
+  selectedBithYear:any
 
-  starWarsDetails:any;
-  cities!:any;
-  selectedCity:any;
+  constructor(private swapi: Swapi, private routeTo: Router) {
+    this.movies = [
+      { name: 'Movies', },
+      { name: 'director', },
+    ]
+    // this.selectedMovie = [this.movies[0]]
 
-  constructor(private swapi:Swapi,private routeTo:Router){
-     this.cities = [
-            { name: 'New York', code: 'NY' },
-            { name: 'Rome', code: 'RM' },
-            { name: 'London', code: 'LDN' },
-            { name: 'Istanbul', code: 'IST' },
-            { name: 'Paris', code: 'PRS' }
-        ];
+    this.species =
+      [
+        { name: 'Human', },
+        { name: 'species 2', },]
+    // this.selectedSepecies = [this.species[0]]
+
+    this.starship =
+    [
+      { name: 'starship 1', },
+      { name: 'starship 2', },]
+  // this.selectedStarship = [this.starship[0]]
+
+  this.birthYear =
+  [
+    { name: 'birth 1', },
+    { name: 'birth 2', },]
+// this.selectedBithYear = [this.birthYear[0]]
   }
 
 
   ngOnInit(): void {
-      this.swapi.getSwapi().subscribe(
-        {
-          next:(res) => {
-            this.starWarsDetails = res
-          },
-          error:(err) => console.log(err)
-        }
-      )
+    this.swapi.getSwapi().subscribe(
+      {
+        next: (res) => {
+          this.starWarsDetails = res
+        },
+        error: (err) => console.log(err)
+      }
+    )
   }
 
 
- extractResourceAndId(url:string) {
-  if (typeof url !== 'string') return null;
+  extractResourceAndId(url: string) {
+    if (typeof url !== 'string') return null;
 
-  const parts = url.split('/').filter(Boolean); 
-  const resource = parts[parts.length - 2];     
-  const id = parts[parts.length - 1];   
+    const parts = url.split('/').filter(Boolean);
+    const resource = parts[parts.length - 2];
+    const id = parts[parts.length - 1];
 
-  return  resource + ' ' + id;
-}
+    return resource + ' ' + id;
+  }
 
 
-getdetails(id:number) {
-  this.swapi.getId(id)
-  this.routeTo.navigateByUrl('details')
+  getdetails(id: number) {
+    this.swapi.getId(id)
+    this.routeTo.navigateByUrl('details')
 
-}
+  }
+
+  filterby() {
+    // console.log(this.selectedSepecies[0]?.name);
+    // console.log(this.selectedCity.name[0]?.name);
+    // console.log(this.selectedStarship.name[0]?.name);
+    // console.log(this.selectedMovie.name[0]?.name)
+    // console.log(this.selectedBithYear.name[0]?.name)
+
+    console.log(this.starWarsDetails)
+  }
 
 }
