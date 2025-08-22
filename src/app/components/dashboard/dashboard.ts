@@ -32,7 +32,7 @@ export class Dashboard {
   ogDetails:any;
   movies!:Filter[];
   species!: Filter[];
-  birthYear!:Filter[];
+  birthYear:any;
   selectedCity!: Filter[];
   selectedSpecies!:Filter[]
   selectedStarship!:Filter[]
@@ -49,11 +49,6 @@ export class Dashboard {
       [
         { name: 'All', },
         { name: 'Human', },]
-   
-  this.birthYear =
-  [
-    { name: 'All', },
-    { name: '19BBY', }]
   }
 
 
@@ -64,10 +59,13 @@ export class Dashboard {
           this.starWarsDetails = res;
 
           this.ogDetails = this.starWarsDetails
+          const uniqueYears = [...new Set(this.starWarsDetails.map(p => p.birth_year))];
+          this.birthYear = [{ name: 'All',}, ...uniqueYears.map(y => ({ name: y}))];
         },
         error: (err) => console.log(err)
       }
     )
+    this.flims()
   }
 
 
@@ -114,16 +112,19 @@ export class Dashboard {
 
 
   filterByBirthYear() {
-    if(this.selectedBithYear[0]?.name !== 'All') {
-      this.starWarsDetails =  this.starWarsDetails.filter((details:any) => details.birth_year === this.selectedBithYear[0]?.name)
+    this.starWarsDetails = [...this.ogDetails];
+
+    const selectedYears = this.selectedBithYear.map((item: any) => item.name);
+  
+    // Case 1: If "All" is selected, do nothing
+    if (selectedYears.includes('All')) {
+      return;
     }
-    if(this.selectedBithYear[1]?.name === 'All' && this.selectedBithYear[0]?.name === '19BBY') {
-      this.starWarsDetails = []
-      this.starWarsDetails =  this.ogDetails
-    }
-    if(this.selectedBithYear[1]?.name !== 'All' && this.selectedBithYear[0]?.name !== '19BBY') {
-      this.starWarsDetails =  this.ogDetails 
-    }
+  
+    // Case 2: Filter by selected years
+    this.starWarsDetails = this.starWarsDetails.filter((details: any) =>
+      selectedYears.includes(details.birth_year)
+    );
 
   }
 
@@ -156,6 +157,19 @@ export class Dashboard {
     }
     
 
+  }
+
+
+
+  flims() {
+    this.swapi.getFlims().subscribe(
+      {
+        next:(res) => {
+          console.log(res)
+        },
+        error:(err) => console.log(err)
+      }
+    )
   }
 
 

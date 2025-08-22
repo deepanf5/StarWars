@@ -8,6 +8,7 @@ import { People } from '../components/models/people';
 export class Swapi {
 
   APIUrl:string = "https://swapi.info/api/people";
+  FlimUrl:string = "https://swapi.info/api/films";
   id!:number
 
   constructor(private http:HttpClient) {}
@@ -31,6 +32,12 @@ export class Swapi {
   getSwapI(url:string) {
 
     return this.http.get(url)
+  }
+
+  
+  getFlims() {
+
+    return this.http.get(this.FlimUrl)
   }
 
  
