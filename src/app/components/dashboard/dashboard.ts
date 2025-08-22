@@ -36,7 +36,8 @@ export class Dashboard {
   selectedCity!: Filter[];
   selectedSpecies!:Filter[]
   selectedStarship!:Filter[]
-  selectedBithYear!:Filter[]
+  selectedBithYear!:Filter[];
+  flimDetails:any;
 
   constructor(private swapi: Swapi, private routeTo: Router) {
     this.movies = [
@@ -53,18 +54,8 @@ export class Dashboard {
 
 
   ngOnInit(): void {
-    this.swapi.getSwapi().subscribe(
-      {
-        next: (res:People[]) => {
-          this.starWarsDetails = res;
-
-          this.ogDetails = this.starWarsDetails
-          const uniqueYears = [...new Set(this.starWarsDetails.map(p => p.birth_year))];
-          this.birthYear = [{ name: 'All',}, ...uniqueYears.map(y => ({ name: y}))];
-        },
-        error: (err) => console.log(err)
-      }
-    )
+    
+    this.getSwapiD()
     this.flims()
   }
 
@@ -130,16 +121,22 @@ export class Dashboard {
 
 
   filterByEpisode() {
-    if(this.selectedMovie[0]?.name !== 'All') {
-     this.starWarsDetails =  this.starWarsDetails.slice(0, 12)
-    }
-    if(this.selectedMovie[1]?.name === 'All' && this.selectedMovie[0]?.name === 'A New Hope') {
-      this.starWarsDetails = this.ogDetails
+    
+    console.log(this.selectedMovie)
 
+    this.starWarsDetails = [...this.ogDetails];
+
+    const selectedUrls = this.selectedMovie.map((m: any) => m.flimUrl);
+
+    if (selectedUrls.includes('All')) {
+      return;
     }
-    if(this.selectedMovie.length < 0) {
-      this.starWarsDetails = this.ogDetails
-    }
+  
+    this.starWarsDetails = this.starWarsDetails.filter((person: any) =>
+    person.films.some((filmUrl: string) => selectedUrls.includes(filmUrl))
+  );
+
+  
 
   }
 
@@ -165,9 +162,25 @@ export class Dashboard {
     this.swapi.getFlims().subscribe(
       {
         next:(res) => {
-          console.log(res)
+          this.flimDetails = res
+          this.movies = [{ name: 'All',}, ...this.flimDetails.map((y: any) => ({ name: y.title, flimUrl: y.url}))];
         },
         error:(err) => console.log(err)
+      }
+    )
+  }
+
+
+  getSwapiD() {
+    this.swapi.getSwapi().subscribe(
+      {
+        next: (res:People[]) => {
+          this.starWarsDetails = res;
+
+          this.ogDetails = this.starWarsDetails
+          this.birthYear = [{ name: 'All',}, ...this.ogDetails.map((y:any) => ({ name: y.birth_year}))];
+        },
+        error: (err) => console.log(err)
       }
     )
   }
