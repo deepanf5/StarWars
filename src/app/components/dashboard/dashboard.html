@@ -37,7 +37,8 @@
         <h2 class="uppercase text-primary text-sm">Search results</h2>
       </div>
 
-      @if (starWarsDetails.length < 0) { <p>no details found</p>
+      @if (starWarsDetails.length < 0) { 
+        <p>no details found</p>
         }
         @else {
         <p-table [value]="starWarsDetails" [rows]="5" [tableStyle]="{ 'min-width': '50rem', 'height':'21rem' }"

@@ -9,6 +9,7 @@ export class Swapi {
 
   APIUrl:string = "https://swapi.info/api/people";
   FlimUrl:string = "https://swapi.info/api/films";
+  species:string = "https://swapi.info/api/species"
   id!:number
 
   constructor(private http:HttpClient) {}
@@ -38,6 +39,12 @@ export class Swapi {
   getFlims() {
 
     return this.http.get(this.FlimUrl)
+  }
+
+  getSpecies() {
+
+    return this.http.get(this.species)
+    
   }
 
  
