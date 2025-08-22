@@ -124,7 +124,16 @@ export class Dashboard {
     
     console.log(this.selectedMovie)
 
+    if (!this.selectedMovie || this.selectedMovie.length === 0) {
+      return; // no filter, show all
+    }
+
     this.starWarsDetails = [...this.ogDetails];
+
+    const hasAll = this.selectedMovie.some((m: any) => m.name === 'All');
+  if (hasAll) {
+    return; 
+  }
 
     const selectedUrls = this.selectedMovie.map((m: any) => m.flimUrl);
 
