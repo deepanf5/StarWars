@@ -75,24 +75,59 @@ export class Dashboard {
   }
 
   filterby() {
-    if (this.selectedMovie?.length > 0) {
-      this.filterByEpisode()
-    }
-    else {
-      this.starWarsDetails = this.ogDetails
-    }
+  const hasMovie = this.selectedMovie?.length > 0;
+const hasSpecies = this.selectedSpecies?.length > 0;
+const hasBirthYear = this.selectedBithYear?.length > 0;
+
+this.starWarsDetails = [...this.ogDetails];
 
 
-    if (this.selectedBithYear?.length > 0) {
-      this.filterByBirthYear() 
-    }
+if (hasMovie && hasSpecies && hasBirthYear) {
+  this.filterByEpisode();
+  this.filterByBirthYear();
+  this.filterSpecies();
+}
 
-    if (this.selectedSpecies?.length > 0) {
-      this.filterSpecies()
-    }
 
-    console.log(this.starWarsDetails?.length)
-    console.log(this.starWarsDetails)
+else if (hasMovie && hasSpecies) {
+  this.filterByEpisode();
+  this.filterSpecies();
+}
+
+
+else if (hasMovie && hasBirthYear) {
+  this.filterByEpisode();
+  this.filterByBirthYear();
+}
+
+
+else if (hasSpecies && hasBirthYear) {
+  this.filterSpecies();
+  this.filterByBirthYear();
+}
+
+
+else if (hasMovie) {
+  this.filterByEpisode();
+}
+
+else if (hasSpecies) {
+  this.filterSpecies();
+}
+
+
+else if (hasBirthYear) {
+  this.filterByBirthYear();
+}
+
+else {
+  this.starWarsDetails = [...this.ogDetails]; // No filter applied
+}
+
+
+
+   
+
 
 
   }
